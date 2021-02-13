@@ -72,4 +72,12 @@ QUnit.module('Тестируем функцию letters', function () {
 
 		assert.strictEqual(letters('h', false), 'h');
 	});
+
+	QUnit.test('Правильно работает с некорректными данными', function (assert) {
+		const expected =
+			TypeError('wrong input');
+
+		assert.throws(() => letters( [10, 15] ), expected);
+		assert.throws(() => letters(123, true), expected);
+	});
 });

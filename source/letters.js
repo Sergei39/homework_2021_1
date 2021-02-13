@@ -1,22 +1,18 @@
 'use strict';
 
-const uniqArr = function (arr) {
-    let result = [];
-    arr.forEach(function(item) {
-        if(result.indexOf(item) < 0) {
-            result.push(item);
-        }
-    });
-
-    return result;
-};
+/**
+ * Удаляет повторяющие символы из строки
+ *
+ * @param {String} str - исходная строка
+ * @return {String} отформатированная строка
+ */
 
 const removeDoubleElem = function (str) {
-    let arr = str.split('');
+    const arr = str.split('');
     for (let i = 0; i < arr.length - 1; ++i) {
         let flag = false;
         for (let j = i + 1; j < arr.length; ++j) {
-            if (arr[i] == arr[j]) {
+            if (arr[i] === arr[j]) {
                 arr.splice(j, 1);
                 --j;
                 flag = true;
@@ -31,22 +27,29 @@ const removeDoubleElem = function (str) {
     return arr.join('');
 };
 
-const saveStartWord = function (str) {
-    return uniqArr(str.split('')).join('');
-}
+/**
+ * Удаляет повторяющие символы из строки
+ *
+ * @param {String} str - исходная строка
+ * @param {Boolean} letters - флаг того, как преобразовать строку
+ * @return {String} отформатированная строка
+ */
 
-const saveEndWord = function (str) {
-    return uniqArr(str.split('').reverse()).reverse().join('');
-}
+const letters = function (str, letters) {
+    if ( !(typeof str === 'string') ) {
+		/** @exception */
+		throw new TypeError('wrong input');
+	}
 
-const letters = function (str, format) {
-    if (format === true) {
-        return saveStartWord (str);
+    if (letters === true) {
+        const set = new Set(str.split(''));
+        return Array.from(set).join('');
     }
-    else if (format === false) {
-        return saveEndWord (str);
+
+    else if (letters === false) {
+        const set = new Set(str.split('').reverse());
+        return Array.from(set).reverse().join('');
     }
-    else {
-        return removeDoubleElem (str);
-    }
-}
+
+    return removeDoubleElem (str);
+};
