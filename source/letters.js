@@ -9,22 +9,8 @@
 
 const remove = (str) => {
     const arr = str.split('');
-    for (let i = 0; i < arr.length - 1; ++i) {
-        let flag = false;
-        for (let j = i + 1; j < arr.length; ++j) {
-            if (arr[i] === arr[j]) {
-                arr.splice(j, 1);
-                --j;
-                flag = true;
-            }
-        }
-
-        if (flag) {
-            arr.splice(i, 1);
-                --i;
-        }
-    }
-    return arr.join('');
+    const result = arr.filter(elem => arr.indexOf(elem) === arr.lastIndexOf(elem));
+    return result.join('');
 };
 
 /**
