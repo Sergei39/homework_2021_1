@@ -7,7 +7,7 @@
  * @return {String} отформатированная строка
  */
 
-const removeDoubleElem = function (str) {
+const remove = (str) => {
     const arr = str.split('');
     for (let i = 0; i < arr.length - 1; ++i) {
         let flag = false;
@@ -31,25 +31,27 @@ const removeDoubleElem = function (str) {
  * Удаляет повторяющие символы из строки
  *
  * @param {String} str - исходная строка
- * @param {Boolean} letters - флаг того, как преобразовать строку
+ * @param {Boolean} type - флаг того, как преобразовать строку
  * @return {String} отформатированная строка
  */
 
-const letters = function (str, letters) {
-    if ( !(typeof str === 'string') ) {
+const letters = (str, type) => {
+    if (typeof str !== 'string') {
 		/** @exception */
 		throw new TypeError('wrong input');
-	}
+    }
+    
+    if (typeof type === 'undefined') {
+        return remove(str);
+    }
 
-    if (letters === true) {
+    if (type === true) {
         const set = new Set(str.split(''));
         return Array.from(set).join('');
     }
 
-    else if (letters === false) {
+    else {
         const set = new Set(str.split('').reverse());
         return Array.from(set).reverse().join('');
     }
-
-    return removeDoubleElem (str);
 };
