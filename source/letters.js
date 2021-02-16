@@ -27,17 +27,20 @@ const letters = (str, type) => {
 		throw new TypeError('wrong input');
     }
     
-    if (typeof type === 'undefined') {
+    if (type === undefined) {
         return remove(str);
     }
 
-    if (type === true) {
+    if (typeof type !== 'boolean') {
+		/** @exception */
+		throw new TypeError('wrong input');
+    }
+
+    if (type) {
         const set = new Set(str.split(''));
         return Array.from(set).join('');
     }
 
-    else {
-        const set = new Set(str.split('').reverse());
-        return Array.from(set).reverse().join('');
-    }
+    const set = new Set(str.split('').reverse());
+    return Array.from(set).reverse().join('');
 };
